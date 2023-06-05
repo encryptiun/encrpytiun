@@ -1,0 +1,29 @@
+[
+  {
+    "title": "Cloud Enablement",
+    "description": "Elevate your business with our Cloud Enablement services. Experience dynamic Enterprise Application Architecture on Cloud for robust digital infrastructure. Harness impenetrable security through our SecDevOps, Application Security, and Managed Cloud Security Program. Accelerate operations with Kubernetes Adoption and Enablement. Stay proactive with our Attack Surface Management. Our Penetration Testing as a Service ensures a secure cloud environment. Your future in the cloud starts with us!",
+    "image": {
+      "url": "images/features/noun_branding_1885335.svg",
+      "width": 80,
+      "height": 80
+    }
+  },
+  {
+    "title": "Open Source Software as a Managed Service (OSSMS)",
+    "description": "Discover Encryptiun's Open Source Software as a Managed Service (OSSMS). We comprehend the corporate necessity for open source, yet we know its management can be overwhelming. You dictate requirements, we deliver solutions—using your suggested open source software or ours. We build, manage, and integrate seamlessly into your existing enterprise applications. Let's redefine your open source journey. Together.",
+    "image": {
+      "url": "images/features/noun_The Process_1885341.svg",
+      "width": 80,
+      "height": 80
+    }
+  },
+  {
+    "title": "Managed Compliance Audit Program",
+    "description": "Unleash the power of Managed Compliance Audit Programs! We transform compliance - a complex, resource-demanding aspect of your business - into a seamless operation. Lack the manpower for compliance tasks? No problem! Our expert team shoulders the responsibility, coordinating with auditors, ensuring certifications, maintaining standards, guiding documentation and control implementation. Don't just manage compliance, master it. Choose us, choose success!",
+    "image": {
+      "url": "images/features/noun_3d modeling_1885342.svg",
+      "width": 80,
+      "height": 80
+    }
+  }
+]
