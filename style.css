@@ -319,88 +319,15 @@
   overflow: hidden;
 }
 
-/* Quantum lattice grid */
-.hero-grid {
+/* Quantum Canvas Background */
+#quantum-canvas {
   position: absolute;
   inset: 0;
-  background-image:
-    linear-gradient(rgba(var(--color-primary-rgb), 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(var(--color-primary-rgb), 0.03) 1px, transparent 1px);
-  background-size: 60px 60px;
-  animation: grid-drift 20s linear infinite;
-}
-
-@keyframes grid-drift {
-  0% { transform: translate(0, 0); }
-  100% { transform: translate(60px, 60px); }
-}
-
-/* Glowing nodes */
-.hero-nodes {
-  position: absolute;
-  inset: 0;
-}
-
-.hero-node {
-  position: absolute;
-  width: 3px;
-  height: 3px;
-  border-radius: 50%;
-  background: var(--color-primary);
-  opacity: 0.4;
-  animation: node-pulse 4s ease-in-out infinite alternate;
-}
-
-.hero-node:nth-child(1) { top: 15%; left: 20%; animation-delay: 0s; }
-.hero-node:nth-child(2) { top: 30%; left: 70%; animation-delay: 0.5s; }
-.hero-node:nth-child(3) { top: 60%; left: 40%; animation-delay: 1s; }
-.hero-node:nth-child(4) { top: 45%; left: 85%; animation-delay: 1.5s; }
-.hero-node:nth-child(5) { top: 75%; left: 15%; animation-delay: 2s; }
-.hero-node:nth-child(6) { top: 20%; left: 50%; animation-delay: 0.7s; }
-.hero-node:nth-child(7) { top: 80%; left: 65%; animation-delay: 1.2s; }
-.hero-node:nth-child(8) { top: 50%; left: 10%; animation-delay: 1.8s; }
-
-@keyframes node-pulse {
-  0% { opacity: 0.2; transform: scale(1); }
-  100% { opacity: 0.5; transform: scale(1.2); }
-}
-
-/* Gradient radial glow */
-.hero-glow {
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 80vw;
-  height: 80vw;
-  max-width: 900px;
-  max-height: 900px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(var(--color-primary-rgb), 0.04) 0%, rgba(var(--color-secondary-rgb), 0.02) 40%, transparent 70%);
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 1;
   pointer-events: none;
-}
-
-/* Connection lines */
-.hero-lines {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-}
-
-.hero-line {
-  position: absolute;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(var(--color-primary-rgb), 0.06), transparent);
-  animation: line-scan 8s linear infinite;
-}
-
-.hero-line:nth-child(1) { top: 25%; left: -100%; width: 200%; animation-delay: 0s; }
-.hero-line:nth-child(2) { top: 55%; left: -100%; width: 200%; animation-delay: 2s; }
-.hero-line:nth-child(3) { top: 78%; left: -100%; width: 200%; animation-delay: 4s; }
-
-@keyframes line-scan {
-  0% { transform: translateX(-50%); }
-  100% { transform: translateX(50%); }
 }
 
 .hero-content {
@@ -416,8 +343,19 @@
 }
 
 .hero h1 .text-gradient {
-  color: var(--color-primary);
-  -webkit-text-fill-color: var(--color-primary);
+  display: inline-block;
+  color: transparent;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary), var(--color-primary));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: text-glow 4s linear infinite;
+}
+
+@keyframes text-glow {
+  0% { background-position: 0% center; text-shadow: 0 0 10px rgba(var(--color-primary-rgb), 0.2); }
+  50% { background-position: 100% center; text-shadow: 0 0 20px rgba(var(--color-primary-rgb), 0.5); }
+  100% { background-position: 200% center; text-shadow: 0 0 10px rgba(var(--color-primary-rgb), 0.2); }
 }
 
 .hero-subtitle {
@@ -499,16 +437,19 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
-  transition: border-color var(--transition-interactive), background var(--transition-interactive);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none;
   color: inherit;
   border-top: 3px solid transparent;
+  transform: translateY(0);
 }
 
 .service-card:hover {
   border-top-color: var(--color-primary);
   background: var(--color-surface-2);
   color: inherit;
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px -10px rgba(var(--color-primary-rgb), 0.15);
 }
 
 .service-card:active {

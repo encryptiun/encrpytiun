@@ -169,5 +169,123 @@
       });
     });
 
+    // ---------- Canvas Particle Network ----------
+    const canvas = document.getElementById('quantum-canvas');
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      let width, height;
+      let particles = [];
+      const mouse = { x: -1000, y: -1000 };
+      let primaryRgb = '15, 98, 254';
+
+      function updateColors() {
+        const style = getComputedStyle(document.documentElement);
+        primaryRgb = style.getPropertyValue('--color-primary-rgb').trim() || '15, 98, 254';
+      }
+      updateColors();
+
+      function resize() {
+        width = canvas.width = window.innerWidth;
+        const hero = document.querySelector('.hero');
+        height = canvas.height = hero ? hero.offsetHeight : window.innerHeight;
+        initParticles();
+      }
+
+      window.addEventListener('resize', resize);
+
+      class Particle {
+        constructor() {
+          this.x = Math.random() * width;
+          this.y = Math.random() * height;
+          this.vx = (Math.random() - 0.5) * 0.8;
+          this.vy = (Math.random() - 0.5) * 0.8;
+          this.radius = Math.random() * 1.5 + 0.5;
+        }
+
+        update() {
+          this.x += this.vx;
+          this.y += this.vy;
+
+          if (this.x < 0 || this.x > width) this.vx *= -1;
+          if (this.y < 0 || this.y > height) this.vy *= -1;
+
+          // Mouse interaction (repel slightly or attract slightly, let's do soft repel)
+          const dx = mouse.x - this.x;
+          const dy = mouse.y - this.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 120) {
+            this.x -= dx * 0.02;
+            this.y -= dy * 0.02;
+          }
+        }
+
+        draw() {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${primaryRgb}, 0.6)`;
+          ctx.fill();
+        }
+      }
+
+      function initParticles() {
+        particles = [];
+        const particleCount = Math.min(Math.floor((width * height) / 12000), 120);
+        for (let i = 0; i < particleCount; i++) {
+          particles.push(new Particle());
+        }
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
+
+        for (let i = 0; i < particles.length; i++) {
+          particles[i].update();
+          particles[i].draw();
+
+          for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const distSq = dx * dx + dy * dy;
+
+            if (distSq < 15000) {
+              ctx.beginPath();
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+              const opacity = 0.2 - (distSq / 75000);
+              ctx.strokeStyle = `rgba(${primaryRgb}, ${opacity})`;
+              ctx.lineWidth = 0.6;
+              ctx.stroke();
+            }
+          }
+        }
+        requestAnimationFrame(animate);
+      }
+
+      const hero = document.querySelector('.hero');
+      if (hero) {
+        hero.addEventListener('mousemove', (e) => {
+          const rect = canvas.getBoundingClientRect();
+          mouse.x = e.clientX - rect.left;
+          mouse.y = e.clientY - rect.top;
+        });
+        hero.addEventListener('mouseleave', () => {
+          mouse.x = -1000;
+          mouse.y = -1000;
+        });
+      }
+
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          if (mutation.type === "attributes" && mutation.attributeName === "data-theme") {
+            updateColors();
+          }
+        });
+      });
+      observer.observe(document.documentElement, { attributes: true });
+
+      resize();
+      animate();
+    }
+
   });
 })();
