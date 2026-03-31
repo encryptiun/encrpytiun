@@ -33,8 +33,8 @@
   --text-hero: clamp(2.8rem, 2rem + 4vw, 4rem);
 
   /* --- Font Families --- */
-  --font-display: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Cabinet Grotesk', 'Satoshi', sans-serif;
+  --font-body: 'Satoshi', sans-serif;
 
   /* --- Spacing (4px base) --- */
   --space-1: 0.25rem;
