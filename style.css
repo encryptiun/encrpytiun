@@ -17,7 +17,7 @@
   padding-block: clamp(var(--space-12), 6vw, var(--space-24));
 }
 
-.text-center { text-align: center; }
+.text-center { text-align: left; }
 .text-left { text-align: left; }
 
 /* ---------- Scroll Animations ---------- */
@@ -386,7 +386,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: var(--space-6);
-  text-align: center;
+  text-align: left;
 }
 
 @media (min-width: 768px) {
@@ -503,9 +503,8 @@
   font-size: var(--text-lg);
   color: var(--color-text-muted);
   max-width: 65ch;
-  margin-inline: auto;
   line-height: 1.8;
-  text-align: center;
+  text-align: left;
   margin-bottom: var(--space-12);
 }
 
@@ -575,10 +574,10 @@
 }
 
 .cta-inner {
-  text-align: center;
+  text-align: left;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: var(--space-6);
 }
 
@@ -615,7 +614,7 @@
 }
 
 .section-heading.text-center p {
-  margin-inline: auto;
+  margin-inline: 0;
 }
 
 /* ========================================
@@ -790,13 +789,13 @@
 .industry-item {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: var(--space-3);
   padding: var(--space-6);
   background: var(--color-surface-2);
   border: 1px solid var(--color-border);
   border-radius: 0;
-  text-align: center;
+  text-align: left;
 }
 
 /* ========================================
@@ -1117,7 +1116,7 @@
   border: none;
   border-radius: 0;
   padding: var(--space-8);
-  text-align: center;
+  text-align: left;
 }
 
 .assessment-card h3,
